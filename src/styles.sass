@@ -1,23 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 // Colors
-$color-background: #24232C
+$color-gray: #24232C
+$color-dark-gray: #18171F
 $color-medium-gray: #817D92
 $color-light-gray: #E6E5EA
-$color-dark-gray-alt: #18171F
 $color-accent-green: #A4FFAF
 $color-accent-red: #F64A4A
-$color-accent-orange: #FB7C58
+$color-accent-orange: #36211c
 $color-accent-yellow: #F8CD65
+
+$background: linear-gradient(180deg, #14131B 0%, #08070B 100%)
+
+
+// font sizes
+$font-size: ("lg": 18px,"md": 16px,"sm": 14px)
 
 *
     box-sizing: border-box
-    width: 100vw
-    height: 100vh 
+    // width: 100vw
+    // height: 100vh 
     padding: 0
     margin: 0
     overflow: hidden
     font-family: "JetBrains Mono", monospace
-    background-color: $color-background
+    
 
 
 .text-primary
@@ -32,4 +38,9 @@ $color-accent-yellow: #F8CD65
     align-items: center
 
 .flex-col 
+    display: flex
     flex-direction: column
+
+.flex
+    display: flex
+    align-items: center
