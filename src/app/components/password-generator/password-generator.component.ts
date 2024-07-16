@@ -16,6 +16,7 @@ export class PasswordGeneratorComponent {
   includeNumbers: boolean = false;
   includeSymbols: boolean = false;
   passwordStrength: string = '';
+  showCopiedNotification: boolean = false;
 
   private lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
   private uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -78,5 +79,28 @@ export class PasswordGeneratorComponent {
     } else {
       return 'Medium';
     }
+  }
+
+  copyPassword() {
+    // Copy password to clipboard
+    this.copyTextToClipboard(this.password);
+
+    // Show notification
+    this.showCopiedNotification = true;
+
+    // Hide notification after 2 seconds
+    setTimeout(() => {
+      this.showCopiedNotification = false;
+    }, 2000);
+  }
+
+
+  private copyTextToClipboard(text: string) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
   }
 }
