@@ -54,7 +54,6 @@ export class PasswordGeneratorComponent {
 
     this.password = generatedPassword;
     this.passwordStrength = this.getPasswordStrength(generatedPassword);
-
   }
 
   private getPasswordStrength(password: string): string {
@@ -94,7 +93,6 @@ export class PasswordGeneratorComponent {
     }, 2000);
   }
 
-
   private copyTextToClipboard(text: string) {
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -102,5 +100,16 @@ export class PasswordGeneratorComponent {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
+  }
+
+  // Handle slider input change
+  onSliderChange(event: Event) {
+    this.passwordLength = +(<HTMLInputElement>event.target).value;
+    this.generatePassword();
+  }
+
+  // Calculate progress bar width
+  getProgressWidth() {
+    return (this.passwordLength / 20) * 100; // Adjust max value as needed
   }
 }
