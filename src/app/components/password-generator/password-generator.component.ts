@@ -15,6 +15,7 @@ export class PasswordGeneratorComponent {
   includeLowercase: boolean = false;
   includeNumbers: boolean = false;
   includeSymbols: boolean = false;
+  passwordStrength: string = '';
 
   private lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
   private uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -23,6 +24,8 @@ export class PasswordGeneratorComponent {
 
   generatePassword(): void {
     let characterPool = '';
+
+    // console.log(`lowercase: ${this.includeLowercase} , uppercase: ${this.includeUppercase} , numbers: ${this.includeNumbers} , symbols: ${this.includeSymbols}`);
 
     if (this.includeLowercase) {
       characterPool += this.lowercaseChars;
@@ -49,5 +52,31 @@ export class PasswordGeneratorComponent {
     }
 
     this.password = generatedPassword;
+    this.passwordStrength = this.getPasswordStrength(generatedPassword);
+
+  }
+
+  private getPasswordStrength(password: string): string {
+    const length = password.length;
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSymbol = /[^a-zA-Z0-9]/.test(password);
+
+    const typeCount = [hasLowercase, hasUppercase, hasNumber, hasSymbol].filter(
+      Boolean
+    ).length;
+
+    if (length < 8) {
+      return 'Too Weak';
+    } else if (length >= 8 && typeCount === 1) {
+      return 'Weak';
+    } else if (length >= 8 && typeCount >= 2 && typeCount < 3) {
+      return 'Medium';
+    } else if (length >= 12 && typeCount >= 3) {
+      return 'Strong';
+    } else {
+      return 'Medium';
+    }
   }
 }
