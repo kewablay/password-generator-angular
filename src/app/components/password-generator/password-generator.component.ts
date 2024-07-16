@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-password-generator',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './password-generator.component.html',
   styleUrl: './password-generator.component.sass',
 })
@@ -108,8 +109,11 @@ export class PasswordGeneratorComponent {
     this.generatePassword();
   }
 
-  // Calculate progress bar width
-  getProgressWidth() {
-    return (this.passwordLength / 20) * 100; // Adjust max value as needed
+  sliderProgress() {
+    return {
+      background: `linear-gradient(90deg, #a4ffaf ${
+        this.passwordLength * 5
+      }%, #18171F 0%)`,
+    };
   }
 }
